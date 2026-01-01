@@ -1,5 +1,4 @@
 import os
-import sys
 
 
 def calculate_health_status(avg):
@@ -16,16 +15,16 @@ def calculate_health_status(avg):
 
 
 def get_int_env(var_name, default):
-    """Read integer env variable with safe default"""
+    """Safely read integer environment variable with default"""
     try:
         return int(os.getenv(var_name, default))
-    except ValueError:
+    except (TypeError, ValueError):
         return default
 
 
 def main():
-    # Defaults (used if Jenkins parameters are missing)
-    name = os.getenv("PATIENT_NAME", "Default Patient")
+    # Default values (used if Jenkins params not provided)
+    name = os.getenv("PATIENT_NAME", "Akash")
     age = get_int_env("AGE", 30)
 
     bp = get_int_env("BP_SCORE", 75)
